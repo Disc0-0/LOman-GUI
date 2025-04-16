@@ -1,0 +1,276 @@
+2025-04-13 19:51:27,909 - INFO - Starting LastOasisManager...
+2025-04-13 19:51:27,910 - INFO - Configuration updated successfully
+2025-04-13 19:51:27,910 - INFO - Restarting all tiles with 1 second wait time
+2025-04-13 19:51:27,910 - INFO - Process shutdown completed in 0.00 seconds
+2025-04-13 19:51:27,911 - INFO - All processes stopped, waiting 5 seconds before updating
+2025-04-13 19:51:32,911 - INFO - Starting Steam game update process
+2025-04-13 19:51:32,911 - INFO - Running SteamCMD update with command: ['c:\\steamcmd\\steamcmd.exe', '+login', 'anonymous', '+app_update', '920720', 'validate', '+quit']
+2025-04-13 19:51:56,666 - INFO - SteamCMD update completed with return code: 0
+2025-04-13 19:51:56,666 - INFO - SteamCMD output: Steam Console Client (c) Valve Corporation - version 1743712175
+-- type 'quit' to exit --
+Loading Steam API...OK
+
+Connecting anonymously to Steam Public...OK
+Waiting for client config...OK
+Waiting for user info...OK
+ Update state (0x5) verifying install, progress: 9.85 (745615149 / 7567257017)
+ Update state (0x5) verifying install, progress: 20.12 (1522459139 / 7567257017)
+ Update state (0x5) verifying install, progress: 30.34 (2296262196 / 7567257017)
+ Update state (0x5) verifying install, progress: 40.17 (3039439594 / 7567257017)
+ Update state (0x5) verifying install, progress: 50.42 (3815374522 / 7567257017)
+ Update state (0x5) verifying install, progress: 60.72 (4594569026 / 7567257017)
+ Update state (0x5) verifying install, progress: 70.61 (5343054240 / 7567257017)
+ Update state (0x5) verifying install, progress: 80.58 (6097805488 / 7567257017)
+ Update state (0x5) verifying install, progress: 90.57 (6853444346 / 7567257017)
+Success! App '920720' fully installed.
+Redirecting stderr to 'c:\steamcmd\logs\stderr.txt'
+Logging directory: 'c:\steamcmd/logs'
+[  0%] Ser etter tilgjengelige oppdateringer ...
+[----] Bekrefter installasjon ...
+
+2025-04-13 19:51:56,667 - INFO - Game update completed successfully
+2025-04-13 19:51:56,667 - INFO - Configuration updated successfully
+2025-04-13 19:51:56,667 - INFO - Loaded mods info successfully
+2025-04-13 19:51:56,667 - INFO - Checking for mod updates
+2025-04-13 19:52:10,347 - INFO - Out-of-date mods: []
+2025-04-13 19:52:10,348 - INFO - No mods to download
+2025-04-13 19:52:10,348 - INFO - Waiting 1 seconds before starting processes
+2025-04-13 19:52:11,348 - INFO - Starting all game server processes
+2025-04-13 19:52:11,349 - INFO - Starting 3 game server tiles
+2025-04-13 19:52:11,349 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis0 -port=6668 -QueryPort=29668
+2025-04-13 19:52:11,349 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis0', '-port=6668', '-QueryPort=29668']
+2025-04-13 19:52:11,349 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis1 -port=6669 -QueryPort=29669
+2025-04-13 19:52:11,350 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670
+2025-04-13 19:52:11,350 - INFO - All game server processes started
+2025-04-13 19:52:11,350 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis1', '-port=6669', '-QueryPort=29669']
+2025-04-13 19:52:11,350 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis2', '-port=6670', '-QueryPort=29670']
+2025-04-13 19:52:11,356 - INFO - Process started with PID: 37444
+2025-04-13 19:52:11,356 - INFO - Process started with PID: 36612
+2025-04-13 19:52:11,356 - INFO - Process started with PID: 15112
+2025-04-13 19:52:43,775 - INFO - SIGINT (Ctrl+C) received
+2025-04-13 19:52:43,790 - ERROR - Error during shutdown prompt: name 'msvcrt' is not defined
+2025-04-13 19:52:43,791 - INFO - Shutdown cancelled, continuing execution
+2025-04-13 19:52:49,284 - INFO - SIGINT (Ctrl+C) received
+2025-04-13 19:52:49,297 - ERROR - Error during shutdown prompt: name 'msvcrt' is not defined
+2025-04-13 19:52:49,297 - INFO - Shutdown cancelled, continuing execution
+2025-04-13 19:56:42,645 - INFO - Starting LastOasisManager...
+2025-04-13 19:56:42,645 - INFO - Configuration updated successfully
+2025-04-13 19:56:42,646 - INFO - Restarting all tiles with 1 second wait time
+2025-04-13 19:56:42,646 - INFO - Process shutdown completed in 0.00 seconds
+2025-04-13 19:56:42,646 - INFO - All processes stopped, waiting 5 seconds before updating
+2025-04-13 19:56:47,647 - INFO - Starting Steam game update process
+2025-04-13 19:56:47,647 - INFO - Running SteamCMD update with command: ['c:\\steamcmd\\steamcmd.exe', '+login', 'anonymous', '+app_update', '920720', 'validate', '+quit']
+2025-04-13 19:57:11,687 - INFO - SteamCMD update completed with return code: 0
+2025-04-13 19:57:11,687 - INFO - SteamCMD output: Steam Console Client (c) Valve Corporation - version 1743712175
+-- type 'quit' to exit --
+Loading Steam API...OK
+
+Connecting anonymously to Steam Public...OK
+Waiting for client config...OK
+Waiting for user info...OK
+ Update state (0x5) verifying install, progress: 9.59 (725692205 / 7567257017)
+ Update state (0x5) verifying install, progress: 19.84 (1501487619 / 7567257017)
+ Update state (0x5) verifying install, progress: 30.09 (2277333639 / 7567257017)
+ Update state (0x5) verifying install, progress: 39.86 (3016370922 / 7567257017)
+ Update state (0x5) verifying install, progress: 50.07 (3789160122 / 7567257017)
+ Update state (0x5) verifying install, progress: 60.34 (4566257474 / 7567257017)
+ Update state (0x5) verifying install, progress: 70.19 (5311596960 / 7567257017)
+ Update state (0x5) verifying install, progress: 80.27 (6074403073 / 7567257017)
+ Update state (0x5) verifying install, progress: 90.14 (6820938490 / 7567257017)
+Success! App '920720' fully installed.
+Redirecting stderr to 'c:\steamcmd\logs\stderr.txt'
+Logging directory: 'c:\steamcmd/logs'
+[  0%] Ser etter tilgjengelige oppdateringer ...
+[----] Bekrefter installasjon ...
+
+2025-04-13 19:57:11,688 - INFO - Game update completed successfully
+2025-04-13 19:57:11,689 - INFO - Configuration updated successfully
+2025-04-13 19:57:11,689 - INFO - Loaded mods info successfully
+2025-04-13 19:57:11,689 - INFO - Checking for mod updates
+2025-04-13 19:57:23,534 - INFO - Out-of-date mods: []
+2025-04-13 19:57:23,534 - INFO - No mods to download
+2025-04-13 19:57:23,534 - INFO - Waiting 1 seconds before starting processes
+2025-04-13 19:57:24,535 - INFO - Starting all game server processes
+2025-04-13 19:57:24,535 - INFO - Starting 3 game server tiles
+2025-04-13 19:57:24,536 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis0 -port=6668 -QueryPort=29668
+2025-04-13 19:57:24,537 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis0', '-port=6668', '-QueryPort=29668']
+2025-04-13 19:57:24,537 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis1 -port=6669 -QueryPort=29669
+2025-04-13 19:57:24,537 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis1', '-port=6669', '-QueryPort=29669']
+2025-04-13 19:57:24,538 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670
+2025-04-13 19:57:24,538 - INFO - All game server processes started
+2025-04-13 19:57:24,538 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis2', '-port=6670', '-QueryPort=29670']
+2025-04-13 19:57:24,544 - INFO - Process started with PID: 21252
+2025-04-13 19:57:24,544 - INFO - Process started with PID: 38612
+2025-04-13 19:57:24,546 - INFO - Process started with PID: 41544
+2025-04-13 19:57:32,790 - INFO - SIGINT (Ctrl+C) received
+2025-04-13 19:57:32,844 - ERROR - Error during shutdown prompt: name 'msvcrt' is not defined
+2025-04-13 19:57:32,845 - INFO - Shutdown cancelled, continuing execution
+2025-04-13 19:57:41,629 - INFO - Process stopped or crashed, stop_event: False, shutdown_requested: False, signal_received: False
+2025-04-13 19:57:41,629 - INFO - Discord Message: Tile Crashed: Restarting
+2025-04-13 19:57:41,903 - WARNING - "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis0 -port=6668 -QueryPort=29668 has exited. It will be checked for restart conditions.
+2025-04-13 19:57:42,634 - INFO - Process stopped or crashed, stop_event: False, shutdown_requested: False, signal_received: False
+2025-04-13 19:57:42,634 - INFO - Discord Message: Tile Crashed: Restarting
+2025-04-13 19:57:42,866 - WARNING - "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670 has exited. It will be checked for restart conditions.
+2025-04-13 19:57:42,903 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis0 -port=6668 -QueryPort=29668
+2025-04-13 19:57:42,904 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis0', '-port=6668', '-QueryPort=29668']
+2025-04-13 19:57:42,908 - INFO - Process started with PID: 34052
+2025-04-13 19:57:43,866 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670
+2025-04-13 19:57:43,867 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis2', '-port=6670', '-QueryPort=29670']
+2025-04-13 19:57:43,871 - INFO - Process started with PID: 8644
+2025-04-13 19:57:44,624 - INFO - Process stopped or crashed, stop_event: False, shutdown_requested: False, signal_received: False
+2025-04-13 19:57:44,624 - INFO - Discord Message: Tile Crashed: Restarting
+2025-04-13 19:57:44,971 - WARNING - "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis1 -port=6669 -QueryPort=29669 has exited. It will be checked for restart conditions.
+2025-04-13 19:57:45,972 - INFO - Starting "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -messaging -noeac -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis1 -port=6669 -QueryPort=29669
+2025-04-13 19:57:45,972 - INFO - Executing command: ['C:\\lastoasis\\Mist\\Binaries\\Win64\\MistServer-Win64-Shipping.exe', '-log', '-messaging', '-noeac', '-NoLiveServer', '-noupnp', '-EnableCheats', '-backendapiurloverride="backend.last-oasis.com"', '-CustomerKey=oK304BUuYIS0PABd', '-ProviderKey=m74okXwz4jqZbYhm', '-slots=15', '-OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net', '-identifier=Disc0oasis1', '-port=6669', '-QueryPort=29669']
+2025-04-13 19:57:45,977 - INFO - Process started with PID: 26532
+2025-04-13 20:34:39,594 - LOManager - INFO - Configuration loaded successfully
+2025-04-13 20:34:39,594 - LOManager - INFO - Starting Last Oasis Manager
+2025-04-13 20:34:39,594 - LOManager - INFO - Starting 3 tiles
+2025-04-13 20:34:39,595 - LOManager - INFO - Starting tile 0: "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis0 -port=6668 -QueryPort=29668
+2025-04-13 20:34:39,595 - LOManager - INFO - Started thread for tile 0
+2025-04-13 20:34:40,096 - LOManager - INFO - Starting tile 1: "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis1 -port=6669 -QueryPort=29669
+2025-04-13 20:34:40,096 - LOManager - INFO - Started thread for tile 1
+2025-04-13 20:34:40,596 - LOManager - INFO - Starting tile 2: "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670
+2025-04-13 20:34:40,597 - LOManager - INFO - Started thread for tile 2
+2025-04-13 20:34:44,144 - LOManager - INFO - Generating periodic health report
+2025-04-13 20:34:44,477 - LOManager - INFO - Discord Message: **Server Health Report**
+**System Metrics**:
+• CPU: 73.4%
+• Memory: 22.7% (25219 MB free)
+• Disk: 33.2% (310.5 GB free)
+**Tile 0** (PID 13276):
+• CPU: Current 0.0% | Avg 0.0%
+• Memory: Current 4.6 MB | Avg 4.6 MB
+• Threads: 2
+• Uptime: 0:00:04
+**Tile 1** (PID 34876):
+• CPU: Current 0.0% | Avg 0.0%
+• Memory: Current 4.6 MB | Avg 4.6 MB
+• Threads: 2
+• Uptime: 0:00:04
+**Tile 2** (PID 41960):
+• CPU: Current 0.0% | Avg 0.0%
+• Memory: Current 4.6 MB | Avg 4.6 MB
+• Threads: 2
+• Uptime: 0:00:03
+2025-04-13 20:34:44,812 - LOManager - INFO - Health report sent to Discord
+2025-04-13 20:34:44,813 - LOManager - INFO - Checking for mod updates
+2025-04-13 20:34:44,821 - ModChecker - INFO - Adding 6 new mod IDs to the database
+2025-04-13 20:34:44,821 - ModChecker - INFO - Added 0 new mod IDs, skipped 6
+2025-04-13 20:34:44,822 - LOManager - INFO - Checking for updates on 6 mods
+2025-04-13 20:34:44,822 - ModChecker - INFO - Checking updates for 6 mods
+2025-04-13 20:34:44,822 - ModChecker - INFO - Processing mod 1/6: 3310633033
+2025-04-13 20:34:44,822 - ModChecker - INFO - Fetching update time for mod: 3310633033
+2025-04-13 20:34:47,032 - ModChecker - INFO - Processing mod 2/6: 3334887629
+2025-04-13 20:34:47,034 - ModChecker - INFO - Fetching update time for mod: 3334887629
+2025-04-13 20:34:48,792 - ModChecker - INFO - Processing mod 3/6: 3352200991
+2025-04-13 20:34:48,797 - ModChecker - INFO - Fetching update time for mod: 3352200991
+2025-04-13 20:34:51,658 - ModChecker - INFO - Processing mod 4/6: 3352211427
+2025-04-13 20:34:51,673 - ModChecker - INFO - Fetching update time for mod: 3352211427
+2025-04-13 20:34:54,554 - ModChecker - INFO - Processing mod 5/6: 3215551829
+2025-04-13 20:34:54,554 - ModChecker - INFO - Fetching update time for mod: 3215551829
+2025-04-13 20:34:56,960 - ModChecker - INFO - Processing mod 6/6: 3359614829
+2025-04-13 20:34:56,960 - ModChecker - INFO - Fetching update time for mod: 3359614829
+2025-04-13 20:34:57,325 - ModChecker - INFO - Update check complete: 0 mods need updates
+2025-04-13 20:34:57,325 - LOManager - INFO - Found 0 out-of-date mods: []
+2025-04-13 20:36:44,659 - LOManager - INFO - Tile 2 process stopped or crashed (stop_event: False)
+2025-04-13 20:36:44,659 - LOManager - INFO - Discord Message: Tile 2 crashed: Restarting
+2025-04-13 20:36:44,978 - LOManager - WARNING - Tile 2 has exited. It will be restarted.
+2025-04-13 20:36:45,979 - LOManager - INFO - Starting tile 2: "C:\lastoasis\Mist\Binaries\Win64\MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp -EnableCheats -backendapiurloverride="backend.last-oasis.com" -CustomerKey=oK304BUuYIS0PABd -ProviderKey=m74okXwz4jqZbYhm -slots=15 -OverrideConnectionAddress=hh50a2ghm8g.sn.mynetname.net -identifier=Disc0oasis2 -port=6670 -QueryPort=29670
+2025-04-13 20:39:33,078 - LOManager - INFO - Received signal 2, shutting down gracefully
+2025-04-13 20:39:33,079 - LOManager - INFO - Shutting down Last Oasis Manager
+2025-04-13 20:39:33,079 - LOManager - INFO - Stopping all server processes
+2025-04-13 20:39:33,216 - LOManager - INFO - Tile 1 process stopped or crashed (stop_event: True)
+2025-04-13 20:39:33,216 - LOManager - INFO - Discord Message: Tile 1 is being restarted for update
+2025-04-13 20:39:33,453 - LOManager - INFO - Stopping tile 1
+2025-04-13 20:39:33,459 - LOManager - INFO - Process tree for PID 34876 terminated
+2025-04-13 20:39:33,700 - LOManager - INFO - Tile 0 process stopped or crashed (stop_event: True)
+2025-04-13 20:39:33,700 - LOManager - INFO - Discord Message: Tile 0 is being restarted for update
+2025-04-13 20:39:34,038 - LOManager - INFO - Tile 2 process stopped or crashed (stop_event: True)
+2025-04-13 20:39:34,038 - LOManager - INFO - Discord Message: Tile 2 is being restarted for update
+2025-04-13 20:39:34,264 - LOManager - INFO - Stopping tile 0
+2025-04-13 20:39:34,270 - LOManager - INFO - Process tree for PID 13276 terminated
+2025-04-13 20:39:34,290 - LOManager - INFO - Stopping tile 2
+2025-04-13 20:39:34,296 - LOManager - INFO - Process tree for PID 39188 terminated
+2025-04-13 20:39:34,298 - LOManager - WARNING - Force killing process 13276
+2025-04-13 20:39:34,298 - LOManager - WARNING - Could not terminate process 13276: process PID not found (pid=13276)
+2025-04-13 20:39:34,300 - LOManager - WARNING - Force killing process 34876
+2025-04-13 20:39:34,304 - LOManager - WARNING - Could not terminate process 34876: process PID not found (pid=34876)
+2025-04-13 20:39:34,305 - LOManager - WARNING - Force killing process 39188
+2025-04-13 20:39:34,305 - LOManager - WARNING - Could not terminate process 39188: process PID not found (pid=39188)
+2025-04-13 20:39:34,310 - LOManager - INFO - All server processes stopped
+2025-04-13 20:39:34,312 - LOManager - INFO - All server processes stopped
+2025-04-13 20:39:34,312 - LOManager - INFO - Main loop exited
+2025-04-13 20:39:34,319 - LOManager - INFO - Stopping all server processes
+2025-04-13 20:39:34,320 - LOManager - INFO - All server processes stopped
+2025-04-13 20:39:34,320 - LOManager - INFO - Last Oasis Manager stopped
+2025-04-13 20:39:45,327 - LOManager - INFO - Admin status written during shutdown
+2025-04-13 20:39:45,328 - LOManager - INFO - Application shut down
+2025-04-13 20:39:45,329 - LOManager - INFO - Performing final cleanup
+2025-04-13 20:39:56,332 - LOManager - INFO - Admin status written
+2025-04-13 20:43:37,710 - ModChecker - INFO - Adding 6 new mod IDs to the database
+2025-04-13 20:43:37,711 - ModChecker - INFO - Added 0 new mod IDs, skipped 6
+2025-04-13 20:56:26,799 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): discord.com:443
+2025-04-13 20:56:27,076 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 20:56:27,078 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:27,624 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3310633033 HTTP/11" 200 15483
+2025-04-13 20:56:28,923 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:29,257 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3334887629 HTTP/11" 200 14352
+2025-04-13 20:56:30,796 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:31,235 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352200991 HTTP/11" 200 12066
+2025-04-13 20:56:34,015 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:34,347 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352211427 HTTP/11" 200 13097
+2025-04-13 20:56:36,421 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:36,919 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3215551829 HTTP/11" 200 13559
+2025-04-13 20:56:38,722 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 20:56:39,169 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3359614829 HTTP/11" 200 12113
+2025-04-13 20:56:58,001 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (2): discord.com:443
+2025-04-13 20:56:58,315 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 20:56:58,374 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 20:56:58,852 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:00:01,196 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): discord.com:443
+2025-04-13 21:00:01,488 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:00:01,490 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:01,820 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3310633033 HTTP/11" 200 15485
+2025-04-13 21:00:03,404 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:03,713 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3334887629 HTTP/11" 200 14330
+2025-04-13 21:00:06,510 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:06,902 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352200991 HTTP/11" 200 12044
+2025-04-13 21:00:09,270 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:09,733 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352211427 HTTP/11" 200 13100
+2025-04-13 21:00:11,674 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:12,025 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3215551829 HTTP/11" 200 13579
+2025-04-13 21:00:13,501 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:00:13,968 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3359614829 HTTP/11" 200 12114
+2025-04-13 21:00:40,335 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:00:40,417 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (2): discord.com:443
+2025-04-13 21:00:40,604 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:00:40,712 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:08:29,732 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): discord.com:443
+2025-04-13 21:08:30,045 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:08:30,047 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:30,533 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3310633033 HTTP/11" 200 15467
+2025-04-13 21:08:32,093 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:32,377 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3334887629 HTTP/11" 200 14327
+2025-04-13 21:08:33,957 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:34,436 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352200991 HTTP/11" 200 12065
+2025-04-13 21:08:36,261 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:36,586 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3352211427 HTTP/11" 200 13101
+2025-04-13 21:08:37,679 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:37,991 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3215551829 HTTP/11" 200 13560
+2025-04-13 21:08:40,358 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (1): steamcommunity.com:443
+2025-04-13 21:08:40,833 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://steamcommunity.com:443 "GET /sharedfiles/filedetails/?id=3359614829 HTTP/11" 200 12115
+2025-04-13 21:09:12,238 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:09:13,209 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:09:13,684 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:01,038 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:01,651 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:02,552 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:50,443 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:50,835 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:10:51,969 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:11:02,306 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:11:02,722 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:11:03,028 - urllib3.connectionpool - DEBUG - [connectionpool.py:1051] - Starting new HTTPS connection (2): discord.com:443
+2025-04-13 21:11:03,264 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
+2025-04-13 21:11:03,332 - urllib3.connectionpool - DEBUG - [connectionpool.py:546] - https://discord.com:443 "POST /api/webhooks/1309776317750706297/mNnXvfGZwP7ih8g5EzXLxK3r2yWJizmTzT5_fvbXkx-qTlgPFPfsO_LhHgj5QP4N9WMI HTTP/11" 204 0
