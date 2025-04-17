@@ -7,6 +7,8 @@ import os
 import shutil
 import ctypes
 import psutil
+import re
+import logging
 from pathlib import Path
 
 # Third-party imports
@@ -15,6 +17,16 @@ import requests
 # Local imports
 import admin_writer
 from mod_checker import add_new_mod_ids, read_json, update_mods_info
+from TileTracker import get_tracker
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='loman.log',
+    filemode='a'
+)
+logger = logging.getLogger('LOManager')
 
 stop_events = []
 processes = []
@@ -22,32 +34,73 @@ wait_restart_time = 0
 config = {}
 crash_total = 0
 
+# Initialize tile tracker
+tile_tracker = None
+
 kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
 
 
-def send_discord_message(webhook_url, message):
+def send_discord_message(webhook_url, message, server_id=None):
+    """
+    Send a message to Discord via webhook
+    If server_id is provided, attempt to include the tile name
+    """
+    if server_id:
+        tile_name = tile_tracker.get_tile_name(server_id, server_id)
+        message = message.replace("Tile", f"{tile_name}")
+    
+    logger.info("Discord Message: {}".format(message))
     print("Discord Message: {}".format(message))
     data = {"content": message}
     response = requests.post(webhook_url, json=data)
 
     return response.status_code
 
+def check_for_log_updates():
+    """Periodically check log files for tile name updates"""
+    if tile_tracker:
+        tile_tracker.scan_logs_for_tile_names()
+
+
+def extract_server_id(path):
+    """Extract the server ID from the command path"""
+    match = re.search(r'-identifier=(\w+\d+)', path)
+    if match:
+        return match.group(1)
+    return None
 
 def run_process(path, stop_event):
     """ Run an executable and monitor it. """
+    server_id = extract_server_id(path)
+    
     while not stop_event.is_set():
+        logger.info(f"Starting {path}")
         print(f"Starting {path}")
-        # ,
+        
+        # Check for tile name updates before starting
+        check_for_log_updates()
+        
         process = subprocess.Popen(path, stdout=subprocess.DEVNULL, text=True, universal_newlines=True,
-                                   shell=True)  #, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+                                  shell=True)  #, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+        
+        # Send message that tile is starting
+        if server_id:
+            time.sleep(2)  # Give the process a moment to start
+            tile_name = tile_tracker.get_tile_name(server_id, server_id)
+            send_discord_message(config["server_status_webhook"], f"{tile_name} is starting up")
 
         while process.poll() is None and not stop_event.is_set():
             time.sleep(1)  # Check every 500ms
 
+        logger.info("Process stopped or crashed {}".format(stop_event.is_set()))
         print("Process stopped or crashed {}".format(stop_event.is_set()))
 
+        # Update tile tracker in case logs have new information
+        check_for_log_updates()
+
         if stop_event.is_set():
-            send_discord_message(config["server_status_webhook"], "Tile is being restarted for mod update")
+            send_discord_message(config["server_status_webhook"], "Tile is being restarted for mod update", server_id)
+            logger.info(f"Stopping {path}")
             print(f"Stopping {path}")
 
             kill_process = psutil.Process(process.pid)
@@ -61,7 +114,8 @@ def run_process(path, stop_event):
             #    print("CTRL+C sent successfully")
             break
         else:
-            send_discord_message(config["server_status_webhook"], "Tile Crashed: Restarting")
+            send_discord_message(config["server_status_webhook"], "Tile Crashed: Restarting", server_id)
+            logger.info(f"{path} has exited. It will be checked for restart conditions.")
             print(f"{path} has exited. It will be checked for restart conditions.")
             global crash_total
             crash_total += 1
@@ -234,8 +288,28 @@ def update_game():
         print(E)
 
 
+def monitor_tile_names():
+    """Background thread to monitor tile names"""
+    while True:
+        try:
+            check_for_log_updates()
+            time.sleep(30)  # Check every 30 seconds
+        except Exception as e:
+            logger.error(f"Error in tile name monitoring: {e}")
+
 def main():
+    global tile_tracker
     update_config()
+    
+    # Initialize tile tracker with config
+    tile_tracker = get_tracker(
+        log_folder=os.path.join(config["folder_path"].replace("Binaries\\Win64\\", ""), "Saved\\Logs"),
+        config_path="config.json"
+    )
+    
+    # Start background thread for tile name monitoring
+    threading.Thread(target=monitor_tile_names, daemon=True).start()
+    
     restart_all_tiles(1)
 
     while True:
