@@ -19,6 +19,9 @@ import admin_writer
 from mod_checker import add_new_mod_ids, read_json, update_mods_info
 from TileTracker import get_tracker
 
+# Expose important functions at module level
+__all__ = ['start_processes', 'stop_processes', 'restart_all_tiles', 'update_config', 'get_tracker']
+
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
@@ -85,7 +88,7 @@ def run_process(path, stop_event):
         
         # Send message that tile is starting
         if server_id:
-            time.sleep(2)  # Give the process a moment to start
+            time.sleep(10)  # Give the process more time to start and fetch the correct tile name
             tile_name = tile_tracker.get_tile_name(server_id, server_id)
             send_discord_message(config["server_status_webhook"], f"{tile_name} is starting up")
 
@@ -123,24 +126,26 @@ def run_process(path, stop_event):
 
 
 def start_processes():
+    """Start all server processes"""
     global processes, stop_events
     processes = []
     stop_events = []
+    
     for i in range(config["tile_num"]):
         exe_string = ('"{folder_path}MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp'
                       ' -EnableCheats -backendapiurloverride="{backend}" -CustomerKey={customer_key}'
                       ' -ProviderKey={provider_key}'
                       ' -slots={slots} -OverrideConnectionAddress={connection_ip} -identifier={identifier}{index}'
                       ' -port={start_port} -QueryPort={start_query_port}').format(
-            folder_path=config["folder_path"],  # These should match the placeholders
+            folder_path=config["folder_path"],
             backend=config["backend"],
             customer_key=config["customer_key"],
             provider_key=config["provider_key"],
             connection_ip=config["connection_ip"],
             slots=config["slots"],
-            identifier=config["identifier"],  # Placeholder for actual identifier
-            index=i,  # Ensure 'i' is defined correctly in your context
-            start_port=config["start_port"] + i,  # Adjusting according to your loop or calculation
+            identifier=config["identifier"],
+            index=i,
+            start_port=config["start_port"] + i,
             start_query_port=config["start_query_port"] + i)
 
         stop_event = threading.Event()
@@ -150,13 +155,54 @@ def start_processes():
         processes.append(process)
 
 
+def start_single_process(tile_id):
+    """Start a single server process"""
+    global processes, stop_events
+    
+    # Ensure arrays are large enough
+    while len(processes) <= tile_id:
+        processes.append(None)
+    while len(stop_events) <= tile_id:
+        stop_events.append(None)
+    
+    # If there's already a process at this index, stop it
+    if processes[tile_id] is not None:
+        if stop_events[tile_id] is not None:
+            stop_events[tile_id].set()
+        processes[tile_id].join()
+    
+    exe_string = ('"{folder_path}MistServer-Win64-Shipping.exe" -log -noeac -messaging -NoLiveServer -noupnp'
+                  ' -EnableCheats -backendapiurloverride="{backend}" -CustomerKey={customer_key}'
+                  ' -ProviderKey={provider_key}'
+                  ' -slots={slots} -OverrideConnectionAddress={connection_ip} -identifier={identifier}{index}'
+                  ' -port={start_port} -QueryPort={start_query_port}').format(
+        folder_path=config["folder_path"],
+        backend=config["backend"],
+        customer_key=config["customer_key"],
+        provider_key=config["provider_key"],
+        connection_ip=config["connection_ip"],
+        slots=config["slots"],
+        identifier=config["identifier"],
+        index=tile_id,
+        start_port=config["start_port"] + tile_id,
+        start_query_port=config["start_query_port"] + tile_id)
+
+    stop_event = threading.Event()
+    stop_events[tile_id] = stop_event
+    process = threading.Thread(target=run_process, args=(exe_string, stop_event))
+    process.start()
+    processes[tile_id] = process
+
+
 def stop_processes():
     """ Stop all processes gracefully """
     for event in stop_events:
-        event.set()
+        if event is not None:
+            event.set()
 
     for process in processes:
-        process.join()
+        if process is not None:
+            process.join()
 
 
 def update_config():
@@ -322,15 +368,31 @@ def main():
 
             send_discord_message(config["server_status_webhook"], "Out-of-date mods restarting tiles in {} seconds: {}"
                                  .format(config["restart_time"], workshop))
-            admin_writer.write("Restart", config["folder_path"])
+            send_discord_message(config["server_status_webhook"], "Out-of-date mods restarting tiles in {} seconds: {}"
+                                 .format(config["restart_time"], workshop))
+            # Send restart message to each tile
+            for i in range(config["tile_num"]):
+                admin_writer.write("Restart", config["folder_path"], i)
             time.sleep(config["restart_time"])
             restart_all_tiles(1)
+# Entry point for starting the server management explicitly
+def start_server_management():
+    """
+    Start the server management process explicitly.
+    This function should be called when you want to start the server management,
+    rather than having it start automatically on import.
+    """
+    try:
+        main()
+    except KeyboardInterrupt:
+        # Send restart message to each tile
+        for i in range(config["tile_num"]):
+            admin_writer.write("Restart", config["folder_path"], i)
+        # time.sleep(config["restart_time"])
+        stop_processes()
+        print("Server manager stopped by user")
 
 
-try:
-    main()
-except KeyboardInterrupt:
-    admin_writer.write("Restart", config["folder_path"])
-    # time.sleep(config["restart_time"])
-    stop_processes()
-    print("Server manager stopped by user")
+# Only run the main function if this script is executed directly (not imported)
+if __name__ == "__main__":
+    start_server_management()

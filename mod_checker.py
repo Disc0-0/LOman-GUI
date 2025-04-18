@@ -110,6 +110,16 @@ def read_json(json_file: str) -> Dict[str, str]:
         # Read the file
         with open(json_file, 'r') as file:
             data = json.load(file)
+            # Ensure we have a dictionary
+            if not isinstance(data, dict):
+                logger.warning(f"JSON file {json_file} did not contain a dictionary, got {type(data).__name__}. Returning empty dict.")
+                return {}
+                
+            # Remove the 'mods' key if it exists (it's a string that should be in config.json, not here)
+            if 'mods' in data and isinstance(data['mods'], str):
+                logger.warning(f"Found 'mods' string key in {json_file}, removing it")
+                data.pop('mods')
+                
             logger.debug(f"Successfully read JSON file containing {len(data)} entries")
             return data
             
@@ -337,13 +347,45 @@ def update_mods_info(mods_info: Dict[str, str], mod_ids: List[str]) -> Tuple[Lis
                 logger.info(f"Mod {mod_id} is new, setting initial update time to: {current_time}")
                 mods_info[mod_id] = current_time
                 continue
-                
-            # Compare update times
+            
+            # Handle the case where saved_time might be a dictionary (legacy format)
+            if isinstance(saved_time, dict):
+                logger.warning(f"Found dictionary format for mod {mod_id}, converting to string format")
+                # Try to extract the update time from the dictionary if possible
+                try:
+                    if 'update_time' in saved_time:
+                        saved_time = str(saved_time['update_time'])
+                    else:
+                        # If we can't find update time, treat as new mod
+                        logger.warning(f"Couldn't find update time in dictionary for mod {mod_id}")
+                        mods_info[mod_id] = current_time
+                        continue
+                except Exception as e:
+                    logger.error(f"Error converting dictionary to string for mod {mod_id}: {e}")
+                    mods_info[mod_id] = current_time
+                    continue
+            
+            # Compare update times - both should be strings now
             try:
-                if saved_time != current_time:
+                # Extract update date from multi-line format if needed
+                saved_update_date = saved_time
+                if '\n' in saved_time:
+                    # Format is "size\ncreation date\nupdate date"
+                    parts = saved_time.split('\n')
+                    if len(parts) >= 3:
+                        saved_update_date = parts[2]  # Third line is update date
+                    
+                # Extract update date from current_time if it's multi-line
+                current_update_date = current_time
+                if '\n' in current_time:
+                    parts = current_time.split('\n')
+                    if len(parts) >= 3:
+                        current_update_date = parts[2]  # Third line is update date
+                
+                if saved_update_date != current_update_date:
                     logger.info(f"Mod {mod_id} is out of date!")
-                    logger.debug(f"  Saved time: {saved_time}")
-                    logger.debug(f"  Current time: {current_time}")
+                    logger.debug(f"  Saved time: {saved_update_date}")
+                    logger.debug(f"  Current time: {current_update_date}")
                     out_of_date.append(mod_id)
                     mods_info[mod_id] = current_time  # Update the recorded last update time
                     update_count += 1
@@ -364,13 +406,13 @@ def update_mods_info(mods_info: Dict[str, str], mod_ids: List[str]) -> Tuple[Lis
     return out_of_date, mods_info
 
 
-def add_new_mod_ids(mods_info: Dict[str, str], new_mod_ids: List[str]) -> Dict[str, str]:
+def add_new_mod_ids(mods_info: Dict[str, str], new_mod_ids: Union[List[str], str]) -> Dict[str, str]:
     """
     Add new mod IDs to the mods info dictionary if they aren't already present.
     
     Args:
         mods_info: Dictionary of mod IDs and their last update times
-        new_mod_ids: List of new mod IDs to add
+        new_mod_ids: List of new mod IDs to add, or a single mod ID as string
         
     Returns:
         Updated mods_info dictionary with new mod IDs added
@@ -382,12 +424,41 @@ def add_new_mod_ids(mods_info: Dict[str, str], new_mod_ids: List[str]) -> Dict[s
     
     # Handle different input types for new_mod_ids
     if isinstance(new_mod_ids, str):
-        # Handle comma-delimited string
-        logger.debug("Converting comma-delimited string to list of mod IDs")
-        new_mod_ids = [mod_id.strip() for mod_id in new_mod_ids.split(',') if mod_id.strip()]
+        # Check if it's a single mod ID or a comma-delimited string
+        if ',' in new_mod_ids:
+            # Handle comma-delimited string
+            logger.debug("Converting comma-delimited string to list of mod IDs")
+            new_mod_ids = [mod_id.strip() for mod_id in new_mod_ids.split(',') if mod_id.strip()]
+        else:
+            # It's a single mod ID
+            single_id = new_mod_ids.strip()
+            if single_id:
+                logger.debug(f"Converting single mod ID string '{single_id}' to list")
+                new_mod_ids = [single_id]
+            else:
+                logger.warning("Empty mod ID string provided")
+                new_mod_ids = []
     elif not isinstance(new_mod_ids, list):
         logger.error(f"new_mod_ids must be a list or string, got {type(new_mod_ids).__name__}")
         return mods_info
+    
+    # Additional validation: ensure all items in the list are non-empty strings
+    if isinstance(new_mod_ids, list):
+        # Filter out any non-string or empty items
+        valid_mod_ids = []
+        for item in new_mod_ids:
+            if not isinstance(item, str):
+                logger.warning(f"Skipping non-string item in mod_ids list: {item}")
+                continue
+            if not item.strip():
+                logger.warning("Skipping empty string in mod_ids list")
+                continue
+            valid_mod_ids.append(item.strip())
+            
+        if len(valid_mod_ids) != len(new_mod_ids):
+            logger.warning(f"Filtered {len(new_mod_ids) - len(valid_mod_ids)} invalid items from mod_ids list")
+            
+        new_mod_ids = valid_mod_ids
     
     added_count = 0
     skipped_count = 0

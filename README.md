@@ -1,214 +1,199 @@
-# LOMan (Last Oasis Manager)
+# LOmanGUI - Last Oasis Server Manager GUI
 
-A comprehensive management system for Last Oasis dedicated servers. This tool suite provides automated server management, monitoring, mod updates, and Discord integration.
+A graphical user interface for managing Last Oasis dedicated servers, with automated mod management and server monitoring.
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Description
 
-Based on [LastOasisServerManager](https://github.com/BrettMeirhofer/LastOasisServerManager) by Brett Meirhofer.
+LOmanGUI provides a user-friendly interface for Last Oasis server administrators to manage their dedicated server instances. It handles server startup, monitoring, mod management, and automatic updates through a simple GUI interface.
 
-## Table of Contents
-- [System Requirements and Prerequisites](#system-requirements-and-prerequisites)
-- [Core Components](#core-components)
-- [Installation and Setup](#installation-and-setup)
-- [Configuration](#configuration)
-- [Usage Instructions](#usage-instructions)
-  - [Server Management](#server-management)
-  - [Discord Integration](#discord-integration)
-  - [Server Queries](#server-queries)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+## Features
 
+- **Server Management**
+  - Start, stop, and restart server instances
+  - Automate server restarts after mod updates
+  - Monitor server status and crashes
+  - Track tile names across server instances
+  
+- **Mod Management**
+  - Add, update, and remove Steam Workshop mods
+  - Automatic detection of mod updates
+  - One-click mod installation
+  - Discord notifications for mod updates
+  
+- **Automation**
+  - Scheduled checks for mod updates
+  - Configurable restart warnings
+  - Discord webhook integration for status notifications
 
-## System Requirements and Prerequisites
+## Components
+
+The application consists of several integrated components:
+
+- **main_gui.py**: Main entry point for the GUI application
+- **LastOasisManager.py**: Core server management functionality
+- **mod_checker.py**: Steam Workshop integration for tracking and updating mods
+- **TileTracker.py**: Component for tracking tile names and server status
+- **DiscordProcessor.py**: Discord webhook integration for notifications
+- **LogMonitor.py**: Server log monitoring functionality
+- **lo_server_query.py**: Server query tool for monitoring server status
+- **admin_writer.py**: Tool for communicating with server admin interfaces
+
+## Prerequisites
 
 - Windows operating system
-- Python 3.x
-- Last Oasis Dedicated Server installed
+- Python 3.7 or higher
 - SteamCMD installed
-- Discord webhook URLs (for notifications)
-- Required Python packages:
-  - requests
-  - beautifulsoup4
-  - psutil
-  - watchdog (for LogMonitor)
-  - python-a2s (for server queries)
+- Last Oasis dedicated server installation
+- Administrative privileges (for server management)
 
+### Required Python Packages
 
-## Core Components
+- PyQt5 (for the GUI)
+- requests (for Steam Workshop API interactions)
+- beautifulsoup4 (for parsing Steam Workshop content)
+- psutil (for process management)
 
-LOMan consists of several integrated components that work together:
+## Installation
 
-1. **LastOasisManager.py** - Core server management with automated startup, monitoring, crash recovery, and mod update coordination
-   - Multi-tile management for running multiple servers
-   - Automated crash detection and recovery
-   - Discord status notifications
-   - Dynamic tile name tracking
-
-2. **mod_checker.py** - Steam Workshop integration for tracking and updating mods
-   - Monitors Steam Workshop for mod updates
-   - Smart rate limiting and retry logic
-   - Local caching to minimize Steam queries
-   - Robust error handling
-
-3. **DiscordProcessor.py** - Discord webhook integration for server status and chat relay
-   - Real-time chat relay with color-coded messages
-   - Player join/leave event tracking
-   - Kill feed monitoring
-   - Uses Discord embeds for better formatting
-
-4. **LogMonitor.py** & **TileTracker** - Log file monitoring and tile name tracking
-   - Real-time log monitoring with watchdog integration
-   - Extracts and processes various log events
-   - Reliable tile name detection
-
-5. **lo_server_query.py** - Server query tool supporting Steam and Unreal Engine protocols
-   - Multiple output formats (JSON, CSV, text)
-   - Port scanning capabilities
-   - Multithreaded for efficient parallel queries
-   - Retrieves player and server information
-
-
-## Installation and Setup
-
-1. Clone or download the LOMan repository to your server
-2. Install required Python dependencies:
-   ```bash
-   pip install requests beautifulsoup4 psutil watchdog python-a2s
+1. **Clone or download the repository**
    ```
-3. Create a config.json file in the LOMan directory (see Configuration section)
-4. Ensure SteamCMD is installed and properly configured
-5. Set up Discord webhooks for notifications
+   git clone <repository-url>
+   ```
+   or download and extract the ZIP archive
 
+2. **Install required Python packages**
+   ```
+   pip install PyQt5 requests beautifulsoup4 psutil
+   ```
+
+3. **Configure your environment**
+   - Make sure SteamCMD is installed and accessible
+   - Ensure your Last Oasis dedicated server is installed
+
+4. **Edit the configuration file**
+   - Create or modify `config.json` to match your server setup
 
 ## Configuration
 
-The system uses a `config.json` file to configure various aspects of operation. Here's a sample configuration with explanations:
+Create a `config.json` file in the main directory with the following structure:
 
 ```json
 {
-  "folder_path": "C:/lastoasis/Binaries/Win64/",
-  "steam_cmd_path": "C:/SteamCMD/",
-  "backend": "https://backend-url.lastoasis.com",
-  "customer_key": "your-customer-key",
-  "provider_key": "your-provider-key",
-  "connection_ip": "your-server-ip",
+  "folder_path": "C:/path/to/LastOasis/server/Binaries/Win64/",
+  "steam_cmd_path": "C:/path/to/steamcmd/",
+  "backend": "https://lastovoy.backends.frikk.online",
+  "customer_key": "your_customer_key",
+  "provider_key": "your_provider_key",
+  "connection_ip": "your_server_ip",
   "slots": 50,
-  "identifier": "LO_Server",
-  "start_port": 8000,
-  "start_query_port": 27015,
-  "tile_num": 3,
-  "server_status_webhook": "https://discord.com/api/webhooks/your-webhook-url",
-  "mods": "123456789,987654321",
-  "mod_check_interval": 3600,
-  "restart_time": 300
+  "identifier": "your_server_identifier",
+  "start_port": 5000,
+  "start_query_port": 6000,
+  "tile_num": 1,
+  "mod_check_interval": 600,
+  "restart_time": 300,
+  "server_status_webhook": "https://discord.com/api/webhooks/your_webhook_url",
+  "mods": "mod_id_1,mod_id_2,mod_id_3"
 }
 ```
 
-Configuration keys:
+### Configuration Fields Explained:
 
-| **Key**                              | **Description**                                      |
-|-------------------------------------|------------------------------------------------------|
-| `folder_path`                       | Path to Last Oasis server binaries                   |
-| `steam_cmd_path`                    | Path to SteamCMD installation                        |
-| `backend`, `customer_key`, `provider_key` | Last Oasis server configuration               |
-| `connection_ip`                     | Server's public IP address                           |
-| `slots`                             | Maximum player slots per tile                        |
-| `identifier`                        | Server identifier prefix                             |
-| `start_port` & `start_query_port`   | Starting ports for multiple tiles                    |
-| `tile_num`                          | Number of tiles to run                               |
-| `server_status_webhook`             | Discord webhook URL for server status notifications  |
-| `mods`                              | Comma-separated list of Steam Workshop mod IDs       |
-| `mod_check_interval`                | Time between mod update checks (in seconds)          |
-| `restart_time`                      | Warning time before server restart (in seconds)      |
+- `folder_path`: Directory containing the Last Oasis server executable
+- `steam_cmd_path`: Directory containing SteamCMD
+- `backend`: Last Oasis backend API URL
+- `customer_key`: Your Last Oasis customer key
+- `provider_key`: Your Last Oasis provider key
+- `connection_ip`: Your server's public IP address
+- `slots`: Maximum player slots per tile
+- `identifier`: Base identifier for your server tiles
+- `start_port`: Starting port number for server instances
+- `start_query_port`: Starting query port for server instances
+- `tile_num`: Number of tile instances to run
+- `mod_check_interval`: Time between mod update checks (in seconds)
+- `restart_time`: Warning time before server restart (in seconds)
+- `server_status_webhook`: Discord webhook URL for status notifications
+- `mods`: Comma-separated list of Steam Workshop mod IDs
 
+## Usage
 
-## Usage Instructions
+### Starting the Application
+
+Run the main application:
+
+```
+python main_gui.py
+```
 
 ### Server Management
 
-To start the server management system:
+The GUI provides buttons and controls for managing your Last Oasis server:
 
-```bash
-python LastOasisManager.py
-```
+- **Start Servers**: Launches all configured server instances
+- **Stop Servers**: Gracefully stops all running server instances
+- **Restart Servers**: Stops and restarts all server instances
+- **Update Game**: Updates the Last Oasis dedicated server installation
 
-This will:
-1. Initialize tile name tracking
+### Mod Management
 
-2. Update the game files using SteamCMD
+The Mod Management panel allows you to:
 
-3. Check for mod updates
+- **Add Mod**: Enter the Steam Workshop ID of a mod to add it to your server
+- **Remove Mod**: Select a mod from the list and remove it
+- **Check for Updates**: Manually check for mod updates
+- **Update Mods**: Apply available mod updates (restarts servers if necessary)
+- **View on Steam**: Opens the Steam Workshop page for the selected mod
 
-4. Download and install mods
+## Mod Management Details
 
-5. Start server instances for each tile
+LOmanGUI makes it easy to manage Steam Workshop mods for your Last Oasis server:
 
-6. Begin monitoring for crashes and mod updates
+1. **Adding Mods**:
+   - Click "Add Mod" button
+   - Enter the Steam Workshop ID (the numeric ID from the mod's URL)
+   - The mod will be downloaded and installed on next server restart
 
-The manager will continuously run, monitoring server health and checking for mod updates based on the configured interval.
+2. **Automatic Updates**:
+   - LOmanGUI periodically checks for mod updates
+   - When updates are detected, a notification is sent to your Discord webhook
+   - Servers are restarted automatically after the configured warning time
 
-### Discord Integration
-
-The Discord integration runs automatically when started:
-
-```bash
-python DiscordProcessor.py
-```
-
-This will monitor server logs and forward various messages to Discord:
-
-- Chat messages (blue)
-- Player join events (green)
-- Tile ready notifications (green)
-- Kill feed (yellow)
-
-You can configure the log files to monitor by editing the `logs_to_monitor` list in DiscordProcessor.py.
-
-### Server Queries
-
-To query your servers for information:
-
-```bash
-python lo_server_query.py --server your-ip:query-port
-```
-
-Additional options:
-
-| **Option**                      | **Description**                                 |
-|--------------------------------|-----------------------------------------------|
-| `--servers file.txt`           | Query multiple servers listed in a file       |
-| `--scan-ports ip:start-end`    | Scan IP address for Steam query ports         |
-| `--output result.json`         | Specify output file for results               |
-| `--format json\|csv\|txt`      | Specify output format                         |
-| `--protocol steam\|unreal\|both` | Choose query protocol                       |
-
+3. **Mod Information**:
+   - Mod IDs and update information are stored in `mods_info.json`
+   - This file is automatically maintained by the application
 
 ## Troubleshooting
 
 ### Common Issues
 
-| **Issue**                                   | **Troubleshooting Steps**                      |
-|--------------------------------------------|--------------------------------------------|
-| **Server crashes immediately after startup** | - Check server log files for error messages<br>- Verify correct paths in config.json<br>- Ensure mod IDs are valid and properly formatted |
-| **Mod updates not detecting**               | - Check network connectivity to Steam<br>- Verify mod IDs in config.json<br>- Check mod_checker.py logs for rate limiting issues |
-| **Discord notifications not working**       | - Verify webhook URL is valid and correctly formatted<br>- Check network connectivity to Discord<br>- Ensure proper permissions for the webhook |
-| **Game updates failing**                    | - Verify SteamCMD is properly installed<br>- Check network connectivity to Steam<br>- Ensure sufficient disk space for updates |
+#### "Error loading mods: str Object has no attribute get"
+- This usually indicates an issue with the `mods_info.json` file format
+- Solution: Ensure `mods_info.json` exists and contains valid JSON
+- If the problem persists, delete `mods_info.json` to regenerate it
+
+#### "Unable to start server instances"
+- Check if the paths in `config.json` are correct
+- Verify that SteamCMD is installed and functioning
+- Ensure you have the correct permissions to run the server executables
+
+#### "Discord notifications not working"
+- Verify that your webhook URL is correct in `config.json`
+- Check your internet connection
+- Ensure the webhook hasn't been deleted or rate-limited on Discord
+
+#### "Mod doesn't appear in game after installation"
+- Verify the mod ID is correct
+- Check the Last Oasis server logs for mod loading errors
+- Some mods may require additional configuration or dependencies
 
 ### Log Files
 
-| **Log File**            | **Description**                           |
-|------------------------|-------------------------------------------|
-| **loman.log**          | Main log file for the server manager      |
-| **mod_checker.log**    | Log file for mod update checks            |
-| **log_monitor.log**    | Log file for the log monitoring system    |
-| **lo_server_query.log**| Log file for server queries               |
-
+- The main application log is stored in `loman.log`
+- Server logs are stored in the Last Oasis server's log directory
 
 ## Contributing
 
-Contributions to LOMan are welcome! To contribute:
+Contributions to LOmanGUI are welcome! To contribute:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -218,9 +203,13 @@ Contributions to LOMan are welcome! To contribute:
 
 Please ensure your code follows the existing style and includes appropriate documentation.
 
-
 ## License
 
-This project is available under the MIT License. See the LICENSE file for details.
+This project is distributed under the MIT License. See the LICENSE file for details.
 
-*LOMan (Last Oasis Manager) is not affiliated with Donkey Crew or Last Oasis. All trademarks are the property of their respective owners.*
+## Acknowledgements
+
+- Last Oasis game and dedicated server by Donkey Crew
+- Steam Workshop for mod distribution platform
+
+*LOmanGUI is not affiliated with Donkey Crew or Last Oasis. All trademarks are the property of their respective owners.*
