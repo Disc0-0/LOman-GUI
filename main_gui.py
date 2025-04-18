@@ -18,7 +18,8 @@ from PyQt5.QtWidgets import (
     QStatusBar, QLabel
 )
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QFont, QPixmap
+from PyQt5 import QtGui
 
 # Import custom panels
 from gui.server_panel import ServerPanel
@@ -51,16 +52,31 @@ class MainWindow(QMainWindow):
     def initUI(self):
         """Initialize the user interface"""
         self.setWindowTitle("Last Oasis Manager GUI")
-        self.setGeometry(100, 100, 1024, 768)
+        self.setGeometry(100, 100, 1200, 800)
         
+        # Set application icon - create a simple icon if one doesn't exist
+        self.setWindowIcon(QIcon(self.createAppIcon()))
+        
+        # Apply stylesheet
+        self.setStyleSheet(self.getStyleSheet())
+        
+        # Create central widget and layout
         # Create central widget and layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
+        layout.setContentsMargins(15, 15, 15, 15)  # Add margin around the entire layout
+        layout.setSpacing(10)  # Add spacing between widgets
+        # Create tab widget
+        # Create header label with title
+        header_label = QLabel("Last Oasis Server Manager")
+        header_label.setObjectName("headerLabel")
+        header_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(header_label)
         
         # Create tab widget
         self.tabs = QTabWidget()
-        
+        self.tabs.setObjectName("mainTabs")
         # Add tabs for each panel
         self.server_panel = ServerPanel()
         self.mod_panel = ModPanel()
@@ -80,11 +96,14 @@ class MainWindow(QMainWindow):
         self.createMenus()
         
         # Create status bar
+        # Create status bar
         self.statusBar = QStatusBar()
+        self.statusBar.setObjectName("statusBar")
         self.setStatusBar(self.statusBar)
         self.statusMsg = QLabel("Ready")
+        self.statusMsg.setObjectName("statusMsg")
         self.statusBar.addWidget(self.statusMsg)
-        
+        self.statusBar.setFixedHeight(30)  # Set a fixed height for the status bar
         # Set up timer for status updates
         self.timer = QTimer()
         self.timer.timeout.connect(self.updateStatus)
@@ -155,8 +174,20 @@ class MainWindow(QMainWindow):
             self, 
             "About Last Oasis Manager GUI",
             "Last Oasis Manager GUI\n\n"
-            "A graphical interface for managing Last Oasis server tiles, "
-            "mods, and admin messages."
+            "The premier solution for managing your Last Oasis dedicated servers "
+            "with ease and precision. Navigate the vast dunes of server administration "
+            "without getting lost in the technical sandstorm.\n\n"
+            "Features:\n"
+            "• Intuitive server tile management and monitoring\n"
+            "• Streamlined mod installation and updates\n"
+            "• Automated server updates via SteamCMD\n"
+            "• Real-time log monitoring and analysis\n"
+            "• Administrative message broadcasting\n\n"
+            "DISCLAIMER: This software is provided 'as is', without warranty of any kind. "
+            "Use at your own risk. While designed to enhance your server management experience, "
+            "please back up important data before use.\n\n"
+            "Made with ♥ by Disc0 © 2025\n"
+            "Last Oasis is a trademark of Donkey Crew. This tool is not affiliated with or endorsed by Donkey Crew."
         )
     
     def showError(self, title, message):
@@ -177,10 +208,155 @@ class MainWindow(QMainWindow):
         else:
             event.ignore()
 
+    def getStyleSheet(self):
+        """Return the application stylesheet"""
+        return """
+            QMainWindow {
+                background-color: #f5f5f5;
+            }
+            QTabWidget::pane {
+                border: 1px solid #cccccc;
+                background-color: white;
+                border-radius: 4px;
+            }
+            QTabBar::tab {
+                background-color: #e0e0e0;
+                color: #505050;
+                min-width: 8ex;
+                min-height: 3ex;
+                padding: 8px 15px;
+                border: 1px solid #cccccc;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                margin-right: 2px;
+            }
+            QTabBar::tab:selected {
+                background-color: white;
+                color: #303030;
+                border-bottom-color: white;
+                font-weight: bold;
+            }
+            QTabBar::tab:hover:!selected {
+                background-color: #e8e8e8;
+            }
+            QStatusBar {
+                background-color: #3a6ea5;
+                color: white;
+            }
+            QLabel#statusMsg {
+                color: white;
+                padding-left: 10px;
+                font-weight: bold;
+            }
+            QPushButton {
+                background-color: #4a86c5;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                min-width: 100px;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #5a96d5;
+            }
+            QPushButton:pressed {
+                background-color: #3a76b5;
+            }
+            QLabel#headerLabel {
+                font-size: 20px;
+                font-weight: bold;
+                color: #3a6ea5;
+                margin-bottom: 10px;
+            }
+            QGroupBox {
+                font-weight: bold;
+                border: 1px solid #cccccc;
+                border-radius: 4px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                subcontrol-position: top center;
+                padding: 0 5px;
+                color: #3a6ea5;
+            }
+            QTableWidget {
+                alternate-background-color: #f9f9f9;
+                selection-background-color: #c2d8e9;
+                selection-color: #000000;
+                border: 1px solid #cccccc;
+                border-radius: 4px;
+            }
+            QTableWidget::item {
+                padding: 5px;
+            }
+            QHeaderView::section {
+                background-color: #e0e0e0;
+                padding: 5px;
+                border: 1px solid #cccccc;
+                font-weight: bold;
+            }
+            QLineEdit, QComboBox {
+                padding: 5px;
+                border: 1px solid #cccccc;
+                border-radius: 3px;
+            }
+            QLineEdit:focus, QComboBox:focus {
+                border: 1px solid #4a86c5;
+            }
+            QMenu {
+                background-color: white;
+                border: 1px solid #cccccc;
+            }
+            QMenu::item {
+                padding: 5px 20px 5px 20px;
+            }
+            QMenu::item:selected {
+                background-color: #c2d8e9;
+            }
+            QMenuBar {
+                background-color: #f0f0f0;
+                border-bottom: 1px solid #cccccc;
+            }
+            QMenuBar::item {
+                padding: 6px 10px;
+                background-color: transparent;
+            }
+            QMenuBar::item:selected {
+                background-color: #c2d8e9;
+                border-radius:.px;
+            }
+        """
+
+    def createAppIcon(self):
+        """Create a simple application icon if one doesn't exist"""
+        # Create a 64x64 icon with 'LO' text
+        pixmap = QPixmap(64, 64)
+        pixmap.fill(Qt.transparent)
+        
+        painter = QtGui.QPainter(pixmap)
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        
+        # Draw background circle
+        painter.setBrush(QtGui.QBrush(QtGui.QColor("#3a6ea5")))
+        painter.setPen(Qt.NoPen)
+        painter.drawEllipse(2, 2, 60, 60)
+        
+        # Draw text
+        painter.setPen(QtGui.QPen(QtGui.QColor("white")))
+        font = QFont("Arial", 20, QFont.Bold)
+        painter.setFont(font)
+        painter.drawText(pixmap.rect(), Qt.AlignCenter, "LO")
+        
+        painter.end()
+        return pixmap
 
 def main():
     """Application entry point"""
     app = QApplication(sys.argv)
+    # Set application-wide font
+    app.setFont(QFont("Segoe UI", 9))
     window = MainWindow()
     window.show()
     

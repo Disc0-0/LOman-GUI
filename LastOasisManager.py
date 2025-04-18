@@ -36,6 +36,7 @@ processes = []
 wait_restart_time = 0
 config = {}
 crash_total = 0
+last_server_check_time = 0  # Track when we last checked for server updates
 
 # Initialize tile tracker
 tile_tracker = None
@@ -305,10 +306,46 @@ def restart_all_tiles(wait):
     start_processes()
 
 
+def check_for_server_update():
+    """
+    Check if server files need to be updated by querying Steam for the latest app info.
+    Returns True if an update is available, False otherwise.
+    """
+    try:
+        logger.info("Checking for Last Oasis server updates...")
+        print("Checking for Last Oasis server updates...")
+
+        # First, update app info to get the latest version information
+        info_cmd = f'{config["steam_cmd_path"]}steamcmd +login anonymous +app_info_update 1 +app_info_print 920720 +quit'
+        process = subprocess.run(info_cmd, shell=True, text=True, capture_output=True)
+        output = process.stdout
+
+        # We can look for update information in the output
+        # For simplicity, we'll compare local and remote build IDs if available
+        # or just check if Steam reports a required update
+        
+        # Look for indications of updates needed
+        if "Update Required" in output or "Update required" in output:
+            logger.info("Server update available - update required by Steam")
+            print("Server update available - update required by Steam")
+            return True
+            
+        # If there's no clear update indicator, we can assume no update is needed
+        logger.info("No server updates detected")
+        print("No server updates detected")
+        return False
+            
+    except Exception as e:
+        logger.error(f"Error checking for server updates: {e}")
+        print(f"Error checking for server updates: {e}")
+        return False
+
+
 def update_game():
     # Define the SteamCMD command
     try:
-        print("Starting steam update")
+        logger.info("Starting Last Oasis server update via Steam")
+        print("Starting Last Oasis server update via Steam")
         steamcmd_command = "{}steamcmd +login anonymous +app_update 920720 validate +quit".format(
             config["steam_cmd_path"])
 
@@ -358,8 +395,38 @@ def main():
     
     restart_all_tiles(1)
 
+    # Set default server check interval if not in config
+    if "server_check_interval" not in config:
+        config["server_check_interval"] = 3600  # Default to once per hour
+
     while True:
-        time.sleep(config["mod_check_interval"])
+        # Sleep for the shorter of the mod check or server check intervals
+        sleep_time = min(config["mod_check_interval"], config["server_check_interval"])
+        time.sleep(sleep_time)
+        
+        # Check for server updates
+        global last_server_check_time
+        current_time = time.time()
+        if current_time - last_server_check_time >= config["server_check_interval"]:
+            last_server_check_time = current_time
+            server_update_available = check_for_server_update()
+            
+            if server_update_available:
+                logger.info("Server update detected - preparing to restart all tiles")
+                send_discord_message(config["server_status_webhook"], 
+                                   "Last Oasis server update detected! Restarting tiles in {} seconds.".format(config["restart_time"]))
+                
+                # Notify players in-game about the restart
+                for i in range(config["tile_num"]):
+                    admin_writer.write("Server update available. Restarting in {} seconds.".format(config["restart_time"]), 
+                                    config["folder_path"], i)
+                    
+                # Wait before restarting
+                time.sleep(config["restart_time"])
+                restart_all_tiles(1)
+                continue  # Skip mod check after server update
+
+        # Check for mod updates
         out_of_date, updated_mods_info = check_mod_updates()
         if len(out_of_date) != 0:
             workshop = []
